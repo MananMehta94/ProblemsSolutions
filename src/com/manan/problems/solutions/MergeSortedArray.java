@@ -34,7 +34,44 @@ package com.manan.problems.solutions;
  * 1 <= m + n <= 200
  * -109 <= nums1[i], nums2[j] <= 109
  * Follow up: Can you come up with an algorithm that runs in O(m + n) time?
- * */
+ */
 
 public class MergeSortedArray {
+
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        int p = 0;
+        int q = 0;
+
+        while (i <= m && j < n) {
+            while (i < m && nums1[i] <= nums2[j]) {
+                i += 1;
+            }
+            k = j;
+            while (j < n && nums2[j] < nums1[i]) {
+                j += 1;
+            }
+            p = j - k;
+            q = m - 1;
+            while (q >= i && p > 0) {
+                nums1[q + p] = nums1[q];
+                q -= 1;
+            }
+            while (k < j) {
+                nums1[i] = nums2[k];
+                i += 1;
+                k += 1;
+            }
+            m = m + p;
+            while (i >= m && j < n) {
+                nums1[i] = nums2[j];
+                i += 1;
+                j += 1;
+            }
+
+        }
+
+    }
 }
